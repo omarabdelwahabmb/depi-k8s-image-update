@@ -20,7 +20,7 @@ pipeline {
               sh "docker build -t ${params.image} ."
               sh "sed -i -E 's,ppath:.*,ppath: \"${params.ppath}\",' '${params.ppath}/vars/vars.yaml'"
               sh "sed -i -E 's,image:.*,image: \"${params.image}\",' '${params.ppath}/vars/vars.yaml'"
-              sh "sed -i -E 's,image:.*,image: \"${params.image}\",' '${params.ppath}/nginx-depl.yaml'"
+              sh "sed -i -E 's,image:.*,image: ${params.image},' '${params.ppath}/nginx-depl.yaml'"
               sh "ansible-playbook nginx-playbook.yml"
             }
           }
