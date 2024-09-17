@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
            steps {
                 dir ("${params.ppath}") { 
-                    git branch: 'main', url: 'https://github.com/omarabdelwahabmb/3twebapp.git'
+                    git branch: 'main', url: 'https://github.com/omarabdelwahabmb/depi-k8s-image-update.git'
                 }
            }
         }
