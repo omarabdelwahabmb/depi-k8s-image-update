@@ -7,15 +7,15 @@
   tasks:
     - include_vars: ./vars/vars.yaml
     - name: Delete old service if exists
-      shell: "minikube kubectl -- delete service nginx"
+      shell: "minikube kubectl -- delete service nginx || true"
       args:
         chdir: "{{ ppath }}"
     - name: Delete old deployment if exists
-      shell: "minikube kubectl -- delete deployment nginx"
+      shell: "minikube kubectl -- delete deployment nginx || true"
       args:
         chdir: "{{ ppath }}"
     - name: Delete old Image if exists
-      shell: "minikube image rm {{image}}"
+      shell: "minikube image rm {{image}} || true"
       args:
         chdir: "{{ ppath }}"
     - name: Load Image
