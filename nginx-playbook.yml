@@ -1,0 +1,22 @@
+---
+
+- name: Deploy Nginx App
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - include_vars: ./vars/vars.yaml
+    - name: Load Image
+      shell: "minikube image load {{image}}"
+      args:
+        chdir: "{{ ppath }}"
+    - name: Apply Deployment
+      shell: minikube kubectl -- apply -f nginx-depl.yaml
+      args:
+        chdir: "{{ ppath }}"
+    - name: Apply Service
+      shell: minikube kubectl -- apply -f nginx-service.yaml
+      args:
+        chdir: "{{ ppath }}"
+    - name: Start the Service
+      shell: minikube service nginx

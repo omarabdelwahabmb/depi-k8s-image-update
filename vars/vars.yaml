@@ -1,0 +1,5 @@
+---
+#vars
+
+ppath: "/home/omar/Eng/Courses/DEPI/Technical/Lec30/k8s-ansibl"
+image: "k8s-nginx"

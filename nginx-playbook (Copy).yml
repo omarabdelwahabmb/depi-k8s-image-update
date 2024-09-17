@@ -1,0 +1,28 @@
+---
+
+- name: Deploy Nginx App
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: install pip3
+      apt: name=python3-pip state=present
+      become: yes
+    - name: install venv
+      apt: name=python3-venv state=present
+      become: yes
+    - name: install pre-requisites
+      pip:
+        name:
+          - kubernetes
+        virtualenv: ./venv
+        virtualenv_command: python3 -m venv
+    - name: Apply Deployment
+      k8s:
+        definition: "{{ lookup('file', 'nginx-depl.yaml') }}"
+        state: present
+
+    - name: Apply Service
+      k8s:
+        definition: "{{ lookup('file', 'nginx-service.yaml') }}"
+        state: present
